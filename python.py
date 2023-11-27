@@ -80,7 +80,8 @@ def rectangle_calculator():
     print("The area of a rectangle with width:", width, "and height:", height, "is:", area, "square units.")
     circumference = 2 * (width + height)
     print("The circumference of a rectangle with width:", width, "and height:", height, "is:", circumference, "units.")
-
+    diagonal = (width ** 2 + height ** 2) ** 0.5
+    print("The diagonal of a rectangle with width:", width, "and height:", height, "is:", diagonal, "units.")
 
 
 def everyone_by_five():
