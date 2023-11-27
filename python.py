@@ -241,15 +241,51 @@ def bmi_calculator ():
 
     # Determine the weight category based on the BMI and print the corresponding message
     if bmi < 18.5:
-        print("You are too skinny")
+        print("You are too skinny, go for a burek")
     elif bmi < 25:
-        print("You are normal")
+        print("You are normal, go for a burek")
     else:
-        print("You are FAT AF")
+        print("You are FAT AF, lay off the burek")
 
 
 
 
+available_functions = [
+    "calculator_of_numbers",
+    "rectangle_calculator",
+    "everyone_by_five",
+    "more_or_less_than_100",
+    "multiplication_practice",
+    "fuel_usage_calculator",
+    "bmi_calculator",
+    "self_math_test",
+    "self_var_test"
+]
 
+# Print the available functions to the user
+print("Available functions:")
+for function_name in available_functions:
+    print(function_name)
 
+function_name = input("Enter the name of the function you want to run: ")
 
+if function_name == "calculator_of_numbers":
+    calculator_of_numbers()
+elif function_name == "rectangle_calculator":
+    rectangle_calculator()
+elif function_name == "everyone_by_five":
+    everyone_by_five()
+elif function_name == "more_or_less_than_100":
+    more_or_less_than_100()
+elif function_name == "multiplication_practice":
+    multiplication_practice()
+elif function_name == "fuel_usage_calculator":
+    fuel_usage_calculator()
+elif function_name == "bmi_calculator":
+    bmi_calculator()
+elif function_name == "self_math_test":
+    self_math_test()
+elif function_name == "self_var_test":
+    self_var_test()
+else:
+    print("Invalid function name.")
