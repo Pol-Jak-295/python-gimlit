@@ -53,76 +53,82 @@ def self_var_test():
     print("real number -6 is: " + str(float_minus_6))
 
 
-
-
-
 variables = {}
 
 
 
+
+
+
+
+
+
 def calculator_of_numbers():
-    # Calculate the instructions
-    values = list(variables.values())
+
+
     def save_value(var_name, entry):
         try:
             value = float(entry.get())
             variables[var_name] = value
         except ValueError:
             variables[var_name] = None
-        first_instruction = sum(values)
-    def calculate():
-
-        first_quarter = values[0:len(values)//4]
-        second_quarter = values[len(values)//4:2*len(values)//4]
-        third_quarter = values[2*len(values)//4:3*len(values)//4]
-        last_quarter = values[3*len(values)//4:4*len(values)//4]
-
-        pt1 = reduce(lambda x, y: x*y, second_quarter)
-        pt2 = reduce(lambda x, y: x*y, third_quarter)
-        pt3 = reduce(lambda x, y: x*y, last_quarter)
-        pt4 = reduce(lambda x, y: x*y, first_quarter)
-        second_instruction = sum(first_quarter + second_quarter) - sum(third_quarter + last_quarter)
-        third_instruction = pt1*pt2*pt3*pt4
-        fourth_instruction = (pt1*pt2) / (pt3*pt4)
-
-
-    # Display the output in the tkinter window
-    output_text.set("1. " + str(first_instruction) + "\n" +
-                    "2. " + str(second_instruction) + "\n" +
-                    "3. " + str(third_instruction) + "\n" +
-                    "4. " + str(fourth_instruction))
-
-# Create the tkinter window
-    window = tk.Tk()
-    window.title("Variable Calculator")
-    window.geometry("300x200")  # Set window size to 300x200
-
-    # Create the input fields
-    num_variables = int(input("Enter the number of variables: "))
-    for i in range(1, num_variables+1):
-        label = tk.Label(window, text="Variable var" + str(i) + ":")
+    
+    def get_variable_values():
+        num_variables = int(num_variables_entry.get())
+        variable_entries = []
+        submit_button.config(text="Submit")  # Change button text to "Submit"
+        
+        def submit_value():
+            nonlocal variable_entries
+            nonlocal num_variables
+            
+            save_value("var" + str(len(variable_entries) + 1), variable_entries[-1])  # Save the value of the current entry
+            
+            if len(variable_entries) < num_variables:
+                label.config(text="Variable var" + str(len(variable_entries) + 2) + ":")  # Update label text
+                entry.delete(0, tk.END)  # Clear the entry field
+                variable_entries.append(entry)  # Add the entry to the list
+            else:
+                calculate_button.pack()  # Show the calculate button
+                submit_button.config(text="Submit", state=tk.DISABLED)  # Change button text to "Submit" and disable it
+        variables_entries = {}
+        label = tk.Label(window, text="Variable var1:")
         label.pack()
         entry = tk.Entry(window)
         entry.pack()
-        button = tk.Button(window, text="Save", command=lambda var_name="var"+str(i), entry=entry: save_value(var_name, entry))
-        button.pack()
+        variable_entries.append(entry)
     
-    # Create the button to calculate the instructions
+        submit_button.config(command=submit_value)  # Change button command to submit_value
+    
+    def calculate():
+        values = [float(entry.get()) for entry in variable_entries]
+        # Perform the calculations
+        # ...
+    
+    # Create the tkinter window
+    window = tk.Tk()
+    window.title("Variable Calculator")
+    window.geometry("300x200")  # Set window size to 300x200
+    
+    # Create the input fields
+    num_variables_label = tk.Label(window, text="Enter the number of variables:")
+    num_variables_label.pack()
+    num_variables_entry = tk.Entry(window)
+    num_variables_entry.pack()
+    
+    def get_num_variables():
+        get_variable_values()
+    
+    # Create the button to submit the number of variables
+    submit_button = tk.Button(window, text="Submit", command=get_num_variables)
+    submit_button.pack()
+    
+    # Create the calculate button
     calculate_button = tk.Button(window, text="Calculate", command=calculate)
-    calculate_button.pack()
-    
-    # Create the output label
-    output_text = tk.StringVar()
-    output_label = tk.Label(window, textvariable=output_text)
-    output_label.pack()
     
     # Run the tkinter window
     window.mainloop()
-
-
-
-
-
+    
 
 def rectangle_calculator():
     def calculator():
@@ -435,10 +441,8 @@ function_var = tk.StringVar()
 function_combobox = tk.OptionMenu(window, function_var, "more_or_less_than_100", "multiplication_practice", "fuel_usage_calculator", "bmi_calculator", "calculator_of_numbers", "rectangle_calculator", "everyone_by_five")
 function_combobox.pack(padx=10, pady=10)
 #make a function to kill the current window and open the selected function
-def kill_window():
-    open_selected_function()
-    window.destroy()
-run_button = tk.Button(window, text="Run", command=kill_window)
+    
+run_button = tk.Button(window, text="Run", command=open_selected_function)
 run_button.pack(padx=10, pady=10)
 
 window.mainloop()
