@@ -1,6 +1,6 @@
 #python 3.2.3
 # -*- coding: utf-8 -*-
-
+#Made by Pol-Jak-295
 #check if both libraries are installed, if not, install them
 try:
     import pygame
