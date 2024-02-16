@@ -340,11 +340,11 @@ def fuel_usage_calculator():
     window = tk.Tk()
     window.title("Fuel Usage Calculator")
     window.geometry("300x200")  # Set window size to 300x200
-    fuel_label = tk.Label(window, text="Enter the amount of fuel used (liters or gallons):")
+    fuel_label = tk.Label(window, text="Enter the amount of fuel used (gallons):")
     fuel_label.pack()
     fuel_entry = tk.Entry(window)
     fuel_entry.pack()
-    distance_label = tk.Label(window, text="Enter the number of kilometers or miles traveled:")
+    distance_label = tk.Label(window, text="Enter the number of miles traveled:")
     distance_label.pack()
     distance_entry = tk.Entry(window)
     distance_entry.pack()
@@ -375,7 +375,7 @@ def bmi_calculator():
             messagebox.showinfo("Weight Category", "You are FAT AF, lay off the burek")
     window = tk.Tk()
     window.title("BMI Calculator")
-    window.geometry("300x200")  # Set window size to 300x200
+    window.geometry("300x350")  # Set window size to 300x200
     weight_label = tk.Label(window, text="Enter your weight without the unit:")
     weight_label.pack()
     weight_entry = tk.Entry(window)
