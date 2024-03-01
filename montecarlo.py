@@ -20,8 +20,8 @@ except ImportError:
 pygame.init()
 
 # Set the width and height of the window
-width = 640
-height = 800
+width = 440
+height = 600
 size = (width, height)
 
 # Create the window
@@ -36,7 +36,7 @@ points = []
 font = pygame.font.Font(None, 36)
 
 # Create a start-stop button
-start_stop_button = pygame.Rect(10, 630, 100, 50)
+start_stop_button = pygame.Rect(10, 430, 100, 50)
 
 # Create a flag to track if the start-stop button is clicked
 start_clicked = False
@@ -61,9 +61,9 @@ while True:
 
     # Generate a random point on the top area of the screen
     if start_clicked:
-        for _ in range(8192):
+        for _ in range(2**4):
             random_x = random.uniform(20, width-20)
-            random_y = random.uniform(20, 620)
+            random_y = random.uniform(20, 420)
 
             random_point = (random_x, random_y)
             points.append(random_point)
@@ -80,9 +80,9 @@ while True:
     for point in points:
         distance = ((point[0] - center_x) ** 2 + (point[1] - center_y) ** 2) ** 0.5
         if distance <= radius:
-            pygame.draw.circle(screen, (0, 255, 0), point, 3)
+            pygame.draw.circle(screen, (0, 255, 0), point, 2)
         else:
-            pygame.draw.circle(screen, (255, 0, 0), point, 3)
+            pygame.draw.circle(screen, (255, 0, 0), point, 2)
 
     # Draw the start-stop button
     if start_clicked:
@@ -91,14 +91,14 @@ while True:
     else:
         pygame.draw.rect(screen, (0, 255, 0), start_stop_button)
         start_stop_text = font.render("Start", True, (255, 255, 255))
-    screen.blit(start_stop_text, (20, 640))
+    screen.blit(start_stop_text, (20, 440))
 
     # Draw the counter
     counter_text = font.render("Points Placed: " + str(points_placed), True, (255, 255, 255))
-    screen.blit(counter_text, (10, 690))
+    screen.blit(counter_text, (10, 490))
 
     in_circle_text = font.render("Points Inside Circle: " + str(points_inside_circle), True, (255, 255, 255))
-    screen.blit(in_circle_text, (10, 730))
+    screen.blit(in_circle_text, (10, 530))
 
     # Calculate the value of pi
     if points_placed > 0:
@@ -106,14 +106,14 @@ while True:
     else:
         pi = 0
     pi_text = font.render("Pi: " + str(pi), True, (255, 255, 255))
-    screen.blit(pi_text, (300, 640))
+    screen.blit(pi_text, (250, 440))
 
     # Calculate the radius of the circle
-    radius = 300
+    radius = 200
 
     # Calculate the center of the circle
     center_x = width / 2
-    center_y = 640 / 2
+    center_y = 440 / 2
 
     # Draw the circle
     pygame.draw.circle(screen, (0, 0, 255), (int(center_x), int(center_y)), int(radius), 1)
@@ -123,7 +123,7 @@ while True:
 
     # Remove points after 1 iterations
     iteration_count += 1
-    if iteration_count >= 1:
+    if iteration_count >= 100:
         points = []
 
 # Main game loop
